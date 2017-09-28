@@ -7,6 +7,7 @@ function readFile(file) {
   if (process.platform === 'win32') {
     contents = contents.replace(/\r\n/g, '\n');
   }
+  test.equal(process.platform, 'foo', 'platform');
   return contents;
 }
 
@@ -21,6 +22,8 @@ function assertFileEquality(test, pathToActual, pathToExpected, message) {
 exports.coffee = {
   compileBare: function(test) {
     test.expect(4);
+
+    test.equal('A', 'B', 'Test');
 
     assertFileEquality(test,
       'tmp/bare/coffee.js',
