@@ -7,7 +7,6 @@ function readFile(file) {
   if (process.platform === 'win32') {
     contents = contents.replace(/\r\n/g, '\n');
   }
-  test.equal(process.platform, 'foo', 'platform');
   return contents;
 }
 
@@ -16,6 +15,7 @@ function assertFileEquality(test, pathToActual, pathToExpected, message) {
   actual = actual.replace(/\r?\n|\r/g, "\n");
   var expected = readFile(pathToExpected);
   expected = expected.replace(/\r?\n|\r/g, "\n");
+  test.equal(process.platform, 'foo', 'platform');
   test.equal(expected, actual, message);
 }
 
