@@ -12,7 +12,9 @@ function readFile(file) {
 
 function assertFileEquality(test, pathToActual, pathToExpected, message) {
   var actual = readFile(pathToActual);
+  actual = actual.replace(/\r?\n|\r/g, "\n");
   var expected = readFile(pathToExpected);
+  expected = expected.replace(/\r?\n|\r/g, "\n");
   test.equal(expected, actual, message);
 }
 
