@@ -6,24 +6,20 @@ function readFile(file) {
   var contents = grunt.file.read(file);
   if (process.platform === 'win32') {
     contents = contents.replace(/\r\n/g, '\n');
+    contents = contents.replace(/\\r\\n/g, '\\n');
   }
   return contents;
 }
 
 function assertFileEquality(test, pathToActual, pathToExpected, message) {
   var actual = readFile(pathToActual);
-  actual = actual.replace(/\r?\n|\r/g, "\n");
   var expected = readFile(pathToExpected);
-  expected = expected.replace(/\r?\n|\r/g, "\n");
-  test.equal(process.platform, 'foo', 'platform');
   test.equal(expected, actual, message);
 }
 
 exports.coffee = {
   compileBare: function(test) {
     test.expect(4);
-
-    test.equal('A', 'B', 'Test');
 
     assertFileEquality(test,
       'tmp/bare/coffee.js',
